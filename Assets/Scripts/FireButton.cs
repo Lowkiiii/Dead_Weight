@@ -9,6 +9,8 @@ public class FireButton : MonoBehaviour
 
     private GameObject currentBullet;
 
+    [SerializeField] private AudioSource fireSound;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         FireBullet();
@@ -32,8 +34,11 @@ public class FireButton : MonoBehaviour
 
     void Update()
     {
+
+
         if (currentBullet != null)
         {
+            fireSound.Play();
             float distanceTravelled = Vector3.Distance(firePoint.position, currentBullet.transform.position);
             if (distanceTravelled >= maxDistance)
             {

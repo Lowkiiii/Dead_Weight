@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public Sprite deathsprite;
     public Animator animator;
 
+    [SerializeField] AudioSource zombieDieSound;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour
             sprite.sprite = deathsprite;
             ChasingSpeed = 0;
             DetectionRange = 0;
+            zombieDieSound.Play();
             Destroy(gameObject, 5f);
             Destroy(other.gameObject);
         }

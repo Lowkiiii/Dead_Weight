@@ -643,6 +643,7 @@ MonoBehaviour:
   fireRate: 1
   ClipLength: 0.1
   AudioClip: {fileID: 1290678329}
+  CharacterMesh: {fileID: 943914203}
 --- !u!65 &70773545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3944,8 +3945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -954, y: -194}
-  m_SizeDelta: {x: 1267.5583, y: 269.2323}
+  m_AnchoredPosition: {x: -954, y: -238}
+  m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1142579914
 MonoBehaviour:
@@ -4097,8 +4098,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.9999394, y: -384.64764}
-  m_SizeDelta: {x: 571, y: 561}
+  m_AnchoredPosition: {x: -1.9999394, y: -304}
+  m_SizeDelta: {x: 500, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1163097898
 MonoBehaviour:
@@ -6707,7 +6708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0.38431373}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

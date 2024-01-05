@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public float ClipLength = 1f;
     public GameObject AudioClip;
 
+    public GameObject CharacterMesh;
+
 
     private void Start()
     {
@@ -91,7 +93,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "zombie")
         {
-            Destroy(gameObject, 0.5f);
+            CharacterMesh.SetActive(false);
+            StartCoroutine(LoadLevelAfterDelay("GameOver", 1f));
+
         }
         else if(collision.gameObject.tag == "FinishLevel"){
             StartCoroutine(LoadLevelAfterDelay("Level Complete", 1f));
@@ -103,6 +107,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(levelName);
     }
+
     public void FireBullet()
     {
         if (bulletPrefab != null && firePoint != null)

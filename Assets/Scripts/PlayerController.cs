@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 
 [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
@@ -43,7 +44,6 @@ public class PlayerController : MonoBehaviour
         Vector3 gyroInput = Input.gyro.userAcceleration;
         Vector3 gyroAimDirection = new Vector3(-gyroInput.x, 0f, -gyroInput.y).normalized;
 
-        // Get the input direction with flipped values if needed
         Vector3 direction = new Vector3(-_joystick.Horizontal, 0f, -_joystick.Vertical).normalized;
         Vector3 firingdirection = new Vector3(-_fireJoystick.Horizontal, 0f, -_fireJoystick.Vertical).normalized;
         
@@ -63,16 +63,14 @@ public class PlayerController : MonoBehaviour
 
         if (firingdirection != Vector3.zero)
         {
-            
-            // Rotate the player to face the movement direction
             Quaternion lookRotation = Quaternion.LookRotation(firingdirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * 10f);
 
-            if (currentBullet == null) // Check if there's no bullet currently firing
+            if (currentBullet == null) 
             {
                 FireBullet();
                 pistolSound.Play();
-                lastFireTime = Time.time; // Record the time of the latest bullet fired
+                lastFireTime = Time.time; 
             }
         }
         if (gyroAimDirection != Vector3.zero)
@@ -80,11 +78,11 @@ public class PlayerController : MonoBehaviour
             Quaternion gyroLookRotation = Quaternion.LookRotation(gyroAimDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, gyroLookRotation, Time.fixedDeltaTime * 10f);
 
-            if (currentBullet == null) // Check if there's no bullet currently firing
+            if (currentBullet == null) 
             {
                 FireBullet();
                 pistolSound.Play();
-                lastFireTime = Time.time; // Record the time of the latest bullet fired
+                lastFireTime = Time.time; 
             }
         }
 
@@ -95,19 +93,24 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject, 0.5f);
         }
+        else if(collision.gameObject.tag == "FinishLevel"){
+            StartCoroutine(LoadLevelAfterDelay("Level Complete", 1f));
+        }
+
+    }
+    private IEnumerator LoadLevelAfterDelay(string levelName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(levelName);
     }
     public void FireBullet()
     {
         if (bulletPrefab != null && firePoint != null)
         {
-            // Play the firing sound
             pistolSound.Play();
-
-            // Activate the AudioClip GameObject
             AudioClip.SetActive(true);
             StartCoroutine(DeactivateAudioClipAfterDelay());
 
-            // Instantiate the bullet
             currentBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(90, 0, 0));
         }
     }
@@ -116,7 +119,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(ClipLength);
 
-        // Deactivate the AudioClip GameObject after the specified duration
         AudioClip.SetActive(false);
     }
 } 

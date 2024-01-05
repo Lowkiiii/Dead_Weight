@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenuSound : MonoBehaviour
+public class LevelCompleteSound : MonoBehaviour
 {
-    [SerializeField] private AudioSource mainmenuSound;
     // Start is called before the first frame update
+    [SerializeField] private AudioSource levelcompleteSound;
     void Start()
     {
-        mainmenuSound.Play();
+        levelcompleteSound.Play();
     }
 }

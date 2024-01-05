@@ -39,7 +39,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
+        Vector3 gyroInput = Input.gyro.userAcceleration;
+        Vector3 gyroAimDirection = new Vector3(-gyroInput.x, 0f, -gyroInput.y).normalized;
+
         // Get the input direction with flipped values if needed
         Vector3 direction = new Vector3(-_joystick.Horizontal, 0f, -_joystick.Vertical).normalized;
         Vector3 firingdirection = new Vector3(-_fireJoystick.Horizontal, 0f, -_fireJoystick.Vertical).normalized;
@@ -64,6 +67,18 @@ public class PlayerController : MonoBehaviour
             // Rotate the player to face the movement direction
             Quaternion lookRotation = Quaternion.LookRotation(firingdirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * 10f);
+
+            if (currentBullet == null) // Check if there's no bullet currently firing
+            {
+                FireBullet();
+                pistolSound.Play();
+                lastFireTime = Time.time; // Record the time of the latest bullet fired
+            }
+        }
+        if (gyroAimDirection != Vector3.zero)
+        {
+            Quaternion gyroLookRotation = Quaternion.LookRotation(gyroAimDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, gyroLookRotation, Time.fixedDeltaTime * 10f);
 
             if (currentBullet == null) // Check if there's no bullet currently firing
             {

@@ -8,8 +8,11 @@ public class Bullet : MonoBehaviour
     GameObject barrel;
     Rigidbody rb;
 
+  
+
     void Start()
     {
+        
         barrel = GameObject.FindGameObjectWithTag("barrel");
 
     }

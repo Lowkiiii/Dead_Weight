@@ -34,8 +34,6 @@ public class FireButton : MonoBehaviour
 
     void Update()
     {
-
-
         if (currentBullet != null)
         {
             fireSound.Play();
